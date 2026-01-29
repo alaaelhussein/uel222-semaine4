@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article index{% endblock %}
+{% block title %}Article Admin{% endblock %}
 
 {% block body %}
 <div class="container container-main">
-    <h1>📝 Gestion des Articles</h1>
+    <h1>🛠️ Panneau d'Administration Articles</h1>
 
     <table class="table table-hover">
         <thead>
@@ -13,52 +13,49 @@
                 <th>Title</th>
                 <th>Category</th>
                 <th>Content</th>
-                <th>Publié</th>              {# nouvelle colonne #}
+                <th>Publié</th>
                 <th>Actions</th>
-                <th>Actions publication</th> {# nouvelle colonne #}
+                <th>Publication</th>
             </tr>
         </thead>
         <tbody>
         {% for article in articles %}
             <tr>
-                <td>{{ article.id }}</td>
-                <td>{{ article.title }}</td>
+                <td><span class="badge bg-secondary">#{{ article.id }}</span></td>
+                <td><strong>{{ article.title }}</strong></td>
                 <td>
                     {% if article.Category.name is defined %}
                         {{ article.Category.name }}
                     {% endif %}
                 </td>
-                <td>{{ article.content }}</td>
+                <td>{{ article.content[:50] }}...</td>
 
-                {# ETAT PUBLIE / BROUILLON #}
                 <td>
                     {% if article.published %}
-                        <span class="badge bg-success">Publié</span>
+                        <span class="badge bg-success">✓ Publié</span>
                     {% else %}
-                        <span class="badge bg-secondary">Brouillon</span>
+                        <span class="badge bg-secondary">📋 Brouillon</span>
                     {% endif %}
                 </td>
 
-                {# ACTIONS EXISTANTES #}
                 <td>
                     <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-sm btn-primary">👁️ Voir</a>
                     <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-sm btn-warning">✏️ Modifier</a>
                 </td>
 
-                {# BOUTON PUBLIER / DEPUBLIER #}
                 <td>
                     <form method="post"
                           action="{{ path('article_toggle', {id: article.id}) }}"
                           onsubmit="return confirm('Changer l\'état de cet article ?');">
                         <button class="btn btn-sm btn-outline-warning">
-                            {% if article.published %}Dépublier{% else %}Publier{% endif %}
+                            {% if article.published %}📴 Dépublier{% else %}📤 Publier{% endif %}
                         </button>
                     </form>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">Aucun article trouvé</td>
+                <td colspan="7" class="text-center py-4">Aucun article trouvé</td>
             </tr>
         {% endfor %}
         </tbody>

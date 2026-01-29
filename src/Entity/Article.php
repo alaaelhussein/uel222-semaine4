@@ -23,6 +23,12 @@ class Article
     #[ORM\JoinColumn(nullable: false)]
     private $Category;
 
+    // #[ORM\Column]
+    // private ?bool $published = null;
+    #[ORM\Column(type: 'boolean')]
+    private bool $published = true;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +66,18 @@ class Article
     public function setCategory(?Category $Category): self
     {
         $this->Category = $Category;
+
+        return $this;
+    }
+
+    public function isPublished(): ?bool
+    {
+        return $this->published;
+    }
+
+    public function setPublished(bool $published): static
+    {
+        $this->published = $published;
 
         return $this;
     }
