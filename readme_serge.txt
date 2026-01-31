@@ -49,4 +49,19 @@ SYNCHRONISATION BASE DE DONNÉES
 Si vous installez le projet, n'oubliez pas de mettre à jour votre schéma :
    php bin/console doctrine:schema:update --force
 
+----------------------------------------------------------
+LISTE DES FICHIERS MODIFIÉS OU CRÉÉS
+----------------------------------------------------------
+ BACK-END :
+- src/Entity/Article.php (Logique métier & champs)
+- src/Repository/ArticleRepository.php (Recherche & Pagination)
+- src/Controller/ArticleController.php (Logique de contrôle)
 
+ FRONT-END :
+- templates/base.html.twig (Structure globale & Fonts)
+- templates/article/index.html.twig (Design des cartes)
+- public/js/article.js (Animations & JS)
+
+ MAINTENANCE & DOC :
+- .gitignore (Optimisation Git)
+- readme_serge.txt (Documentation actuelle)
